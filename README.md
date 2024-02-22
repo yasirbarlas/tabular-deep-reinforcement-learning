@@ -10,6 +10,6 @@ The relevant Jupyter Notebook can be found in the [basic-tasks](../main/basic-ta
 
 ## Advanced Tasks
 
-## Individual Advanced Tasks#
+## Individual Advanced Tasks
 
 ## Extra Tasks
