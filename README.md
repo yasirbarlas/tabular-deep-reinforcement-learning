@@ -12,7 +12,7 @@ The relevant Jupyter Notebook can be found in the [basic-tasks](../main/basic-ta
 
 We investigate the [Deep Q-Network (DQN)](https://arxiv.org/abs/1312.5602), [Rainbow DQN](https://arxiv.org/abs/1710.02298), and [Quantile Regression DQN](https://arxiv.org/abs/1710.10044) algorithms on the ViZDoom 'Defend The Center' environment. We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
 
-We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, and ViZDoom 1.2.3 here. Instructions for installing ViZDoom (through Github or pip) can be found here https://vizdoom.farama.org/.
+We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, and ViZDoom 1.2.3 here. Instructions for installing ViZDoom (through Github or pip) can be found [here](https://vizdoom.farama.org/).
 
 Much work on reinforcement learning seems to be built using the old versions of PyTorch and Gym. Here, we ensure that our code runs well on the latest versions of these libraries.
 
