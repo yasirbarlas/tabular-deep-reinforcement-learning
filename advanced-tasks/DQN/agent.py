@@ -6,7 +6,6 @@ from matplotlib import pyplot as plt
 import torch
 import torch.optim as optim
 import torch.nn.functional as F
-from torch.nn.utils import clip_grad_norm_
 
 from gymnasium.wrappers import RecordVideo
 
