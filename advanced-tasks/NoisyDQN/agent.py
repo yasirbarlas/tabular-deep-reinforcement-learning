@@ -13,8 +13,11 @@ from buffers import *
 from models import *
 from utils import *
 
+## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/05.noisy_net.ipynb ##
+## With some changes ##
+
 class NoisyAgent:
-    """Prioritised Experience Replay DQN Agent interacting with environment
+    """Noisy Network (with PER) DQN Agent interacting with environment
     
     Attribute:
         env (gym.Env): openAI Gym environment
