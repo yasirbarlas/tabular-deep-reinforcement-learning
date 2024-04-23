@@ -1,5 +1,7 @@
 import numpy as np
 
+## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/01.dqn.ipynb ##
+
 class ReplayBuffer:
     """A simple numpy replay buffer."""
 
