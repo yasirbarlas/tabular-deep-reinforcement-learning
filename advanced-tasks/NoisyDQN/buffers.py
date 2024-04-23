@@ -3,6 +3,8 @@ import random
 import numpy as np
 from collections import deque
 
+## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/03.per.ipynb ##
+
 class SegmentTree:
     """ Create SegmentTree.
     Taken from OpenAI baselines github repository:
