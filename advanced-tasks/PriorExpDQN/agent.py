@@ -13,6 +13,9 @@ from buffers import *
 from models import *
 from utils import *
 
+## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/03.per.ipynb ##
+## With some changes ##
+
 class PriorExpReplayAgent:
     """Prioritised Experience Replay DQN Agent interacting with environment
     
