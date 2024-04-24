@@ -10,9 +10,9 @@ The relevant Jupyter Notebook can be found in the [basic-tasks](../main/basic-ta
 
 ## Advanced Tasks
 
-We investigate the [(Target Network + Experience Replay) Deep Q-Network (DQN)](https://www.nature.com/articles/nature14236), [Rainbow DQN](https://arxiv.org/abs/1710.02298), and [Quantile Regression DQN](https://arxiv.org/abs/1710.10044) algorithms on the ViZDoom 'Defend The Center' environment. We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
+We investigate the [(Target Network + Experience Replay) Deep Q-Network (DQN)](https://www.nature.com/articles/nature14236), the [Prioritised Experience Replay DQN](https://arxiv.org/abs/1511.05952v4), the [Noisy Network DQN](https://arxiv.org/abs/1706.10295), and the [N-Step Return DQN](https://link.springer.com/article/10.1007/BF00115009) algorithms on the ViZDoom 'Defend The Center' environment. Each algorithm utilises the previous ones sequentially, similar to what is done in [Rainbow DQN](https://arxiv.org/abs/1710.02298). In other words, we look at a Target Network + Experience Replay DQN, a Target Network + Prioritised Experience Replay DQN, a Target Network + Prioritised Experience Replay + Noisy Network DQN, and lastly a Target Network + Prioritised Experience Replay + Noisy Network + N-Step Return DQN. We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
 
-We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, and ViZDoom 1.2.3 here. Instructions for installing ViZDoom (through Github or pip) can be found [here](https://vizdoom.farama.org/).
+We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, ViZDoom 1.2.3, and for recording the agent in the testing phase, MoviePy 1.0.3. Instructions for installing ViZDoom (through Github or pip) can be found [here](https://vizdoom.farama.org/).
 
 Much work on reinforcement learning seems to be built using the old versions of PyTorch and Gym. Here, we ensure that our code runs well on the latest versions of these libraries.
 
@@ -45,6 +45,18 @@ difficulty level (doom_skill) = 3
 Gymnasium/Gym id: "VizdoomDefendCenter-v0"
 ```
 
+We note that our code is inspired by the [Rainbow is all you need!](https://github.com/Curt-Park/rainbow-is-all-you-need) repository, and that while much of our code is similar, we make certain adjustments to be suited for the ViZDoom environment, and we make the sequential improvements to each algorithm we examine as mentioned previously.
+
 ## Individual Advanced Tasks
 
 ## Extra Tasks
+
+The soft actor-critic algorithm is considered a state-of-the-art algorithm, notably in continuous control tasks. It combines actor-critic methods with maximum entropy reinforcement learning, encouraging exploration while simultaneously optimising for both policy improvement and entropy maximisation. We provide code to work on many of the continuous control tasks found on [Gymnasium](https://gymnasium.farama.org/index.html).
+
+We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, and for recording the agent in the testing phase, MoviePy 1.0.3.
+
+Much work on reinforcement learning seems to be built using the old versions of PyTorch and Gym. Here, we ensure that our code runs well on the latest versions of these libraries.
+
+The relevant Jupyter Notebooks and code can be found in the [extra-tasks](../main/extra-tasks) folder.
+
+We note that our Agent class is inspired by the [PG is all you need!](https://github.com/MrSyee/pg-is-all-you-need) repository, and much of the code is adapted from the [pytorch-soft-actor-critic](https://github.com/pranz24/pytorch-soft-actor-critic) repository.
