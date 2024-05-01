@@ -17,41 +17,25 @@ from utils import *
 ## With some changes ##
 
 class SimpleAgent:
-    """Simple DQN Agent interacting with environment
-    
-    Attribute:
-        env (gym.Env): openAI Gym environment
-        memory (ReplayBuffer): replay memory to store transitions
-        batch_size (int): batch size for sampling
-        epsilon (float): parameter for epsilon greedy policy
-        epsilon_decay (float): step size to decrease epsilon
-        max_epsilon (float): max value of epsilon
-        min_epsilon (float): min value of epsilon
-        target_update (int): period for target model's hard update
-        gamma (float): discount factor
-        dqn (Network): model to train and select actions
-        dqn_target (Network): target model to update
-        optimizer (torch.optim): optimizer for training dqn
-        transition (list): transition information including state, action, reward, next_state, done
     """
-
+    Simple DQN Agent
+    """
     def __init__(self, env, memory_size, batch_size, target_update, seed, gamma = 0.99, max_epsilon = 1.0, min_epsilon = 0.01, epsilon_decay = 0.00001, learning_rate = 0.0000625, optimizer = "adam"):
-        """Initialisation
-        
+        """
+        Initialise the DQN agent with the provided parameters.
+
         Args:
-            env (gym.Env): Gymnasium environment
-            memory_size (int): length of memory
-            batch_size (int): batch size for sampling
-            target_update (int): period for target model's hard update
-            lr (float): learning rate
-            gamma (float): discount factor
-            alpha (float): determines how much prioritization is used
-            beta (float): determines how much importance sampling is used
-            prior_eps (float): guarantees every transition can be sampled
-            v_min (float): min value of support
-            v_max (float): max value of support
-            atom_size (int): the unit number of support
-            n_step (int): step number to calculate n-step td error
+            env (gymnasium.Env): Gymnasium environment
+            memory_size (int): Size of the replay memory
+            batch_size (int): Batch size for sampling from the replay memory
+            target_update (int): Frequency (in steps) at which to update the target network
+            seed (int): Seed for random number generation
+            gamma (float): Discount factor (default: 0.99)
+            max_epsilon (float): Initial epsilon value for epsilon-greedy exploration (default: 1.0)
+            min_epsilon (float): Minimum epsilon value (default: 0.01)
+            epsilon_decay (float): Decay rate for epsilon (default: 0.00001)
+            learning_rate (float): Learning rate for the optimizer (default: 0.0000625)
+            optimizer (str): Name of the optimizer to use ("adam", "rmsprop", or "sgd") (default: "adam")
         """
         obs_dim = env.observation_space.shape
         action_dim = env.action_space.n
@@ -92,11 +76,13 @@ class SimpleAgent:
         # Transition to store in memory
         self.transition = list()
         
-        # mode: train / test
+        # Mode: train / test
         self.is_test = False
 
     def select_action(self, state):
-        """Select an action from the input state."""
+        """
+        Select an action from the input state.
+        """
         selected_action = self.dqn.act(state, self.epsilon)
         
         if not self.is_test:
@@ -105,7 +91,9 @@ class SimpleAgent:
         return selected_action
 
     def step(self, action):
-        """Take an action and return the response of the env."""
+        """
+        Take an action and return the response of the environment.
+        """
         next_state, reward, terminated, truncated, _ = self.env.step(action)
         done = terminated or truncated
 
@@ -116,7 +104,9 @@ class SimpleAgent:
         return next_state, reward, done
 
     def update_model(self):
-        """Update the model by gradient descent."""
+        """
+        Update the model by gradient descent.
+        """
         samples = self.memory.sample_batch()
 
         loss = self._compute_dqn_loss(samples)
@@ -128,7 +118,9 @@ class SimpleAgent:
         return loss.item()
         
     def train(self, num_frames, plotting_interval = 1000):
-        """Train the agent."""
+        """
+        Train the agent.
+        """
         self.is_test = False
         
         state, _ = self.env.reset(seed = self.seed)
@@ -153,19 +145,19 @@ class SimpleAgent:
             self.epsilon = self.min_epsilon + (self.max_epsilon - self.min_epsilon) * np.exp(- self.epsilon_decay * frame_idx)
             epsilons.append(self.epsilon)
 
-            # if episode ends
+            # If episode ends
             if done:
                 state, _ = self.env.reset(seed = self.seed)
                 scores.append(score)
                 score = 0
 
-            # if training is ready
+            # If training is ready
             if len(self.memory) >= self.batch_size:
                 loss = self.update_model()
                 losses.append(loss)
                 update_cnt += 1
 
-                # if hard update is needed
+                # If hard update is needed
                 if update_cnt % self.target_update == 0:
                     self._target_hard_update()
 
@@ -190,7 +182,9 @@ class SimpleAgent:
         self.env.close()
 
     def test(self, video_folder = "dqn_agent_video"):
-        """Test the agent."""
+        """
+        Test the agent.
+        """
         self.is_test = True
         
         # Create checkpoint folder
@@ -219,7 +213,9 @@ class SimpleAgent:
         self.env = naive_env
 
     def _compute_dqn_loss(self, samples):
-        """Return DQN loss."""
+        """
+        Return DQN loss.
+        """
         state = torch.tensor(samples["obs"], dtype = torch.float, device = self.device).to(self.device)
         next_state = torch.tensor(samples["next_obs"], dtype = torch.float, device = self.device).to(self.device)
         action = torch.tensor(samples["acts"].reshape(-1, 1), dtype = torch.long, device = self.device).to(self.device)
@@ -237,24 +233,33 @@ class SimpleAgent:
         return loss
 
     def _target_hard_update(self):
-        """Hard update: target <- local."""
+        """
+        Hard update: target <- local.
+        """
         self.dqn_target.load_state_dict(self.dqn.state_dict())
 
     def _save(self, rewards, losses, epsilons):
+        """
+        Save training results to a pickle file.
+        """
         # Save results to a file
         with open("simple-dqn-results.pkl", "wb") as f:
             pickle.dump(rewards, f)
             pickle.dump(losses, f)
             pickle.dump(epsilons, f)
 
-    def _plot(self, rewards, losses, epsilons):
+    def _plot(self, rewards, losses, epsilons, moving_average_window = 100):
+        """
+        Plot training curves.
+        """
         plt.figure(figsize = (40, 6))
         
+        # Combined plot of rewards, moving average, loss, and epsilons
         plt.subplot(131)
         plt.title("DQN Rewards Per Episode")
         plt.plot(rewards, label = "Reward")
-        if len(rewards) >= 100:
-            plt.plot(moving_average(rewards), label = "Moving Average", color = "red")
+        if len(rewards) >= moving_average_window:
+            plt.plot(moving_average(rewards, moving_average_window), label = "Moving Average", color = "red")
         plt.xlabel("Episode")
         plt.ylabel("Reward")
         plt.legend()

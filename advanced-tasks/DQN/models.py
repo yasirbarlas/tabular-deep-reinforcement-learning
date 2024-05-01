@@ -5,6 +5,9 @@ import random
 import torch
 import torch.nn as nn
 
+## As found in https://github.com/higgsfield/RL-Adventure/blob/master/1.dqn.ipynb ##
+## With some changes ##
+
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

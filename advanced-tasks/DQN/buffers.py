@@ -3,9 +3,10 @@ import numpy as np
 ## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/01.dqn.ipynb ##
 
 class ReplayBuffer:
-    """A simple numpy replay buffer."""
-
-    def __init__(self, obs_shape, size, batch_size = 32, n_step = 3, gamma = 0.99):
+    """
+    A simple NumPy replay buffer.
+    """
+    def __init__(self, obs_shape, size, batch_size = 32):
         self.obs_buf = np.zeros([size] + list(obs_shape), dtype = np.float32)
         self.next_obs_buf = np.zeros([size] + list(obs_shape), dtype = np.float32)
         self.acts_buf = np.zeros([size], dtype = np.float32)
