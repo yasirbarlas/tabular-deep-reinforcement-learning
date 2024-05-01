@@ -7,6 +7,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+## As found in https://github.com/higgsfield/RL-Adventure/blob/master/5.noisy%20dqn.ipynb ##
+## With some changes ##
+
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

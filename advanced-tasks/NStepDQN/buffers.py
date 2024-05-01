@@ -20,7 +20,6 @@ class SegmentTree:
             capacity (int)
             operation (function)
             init_value (float)
-
         """
         assert (capacity > 0 and capacity & (capacity - 1) == 0), "capacity must be positive and a power of 2."
         self.capacity = capacity
@@ -28,7 +27,9 @@ class SegmentTree:
         self.operation = operation
 
     def _operate_helper(self, start, end, node, node_start, node_end):
-        """Returns result of operation in segment."""
+        """
+        Returns result of operation in segment.
+        """
         if start == node_start and end == node_end:
             return self.tree[node]
         mid = (node_start + node_end) // 2
@@ -41,7 +42,9 @@ class SegmentTree:
                 return self.operation(self._operate_helper(start, mid, 2 * node, node_start, mid), self._operate_helper(mid + 1, end, 2 * node + 1, mid + 1, node_end))
 
     def operate(self, start = 0, end = 0):
-        """Returns result of applying `self.operation`."""
+        """
+        Returns result of applying 'self.operation'.
+        """
         if end <= 0:
             end += self.capacity
         end -= 1
@@ -49,7 +52,9 @@ class SegmentTree:
         return self._operate_helper(start, end, 1, 0, self.capacity - 1)
 
     def __setitem__(self, idx, val):
-        """Set value in tree."""
+        """
+        Set value in tree.
+        """
         idx += self.capacity
         self.tree[idx] = val
 
@@ -59,7 +64,9 @@ class SegmentTree:
             idx //= 2
 
     def __getitem__(self, idx):
-        """Get real value in leaf node of tree."""
+        """
+        Get real value in leaf node of tree.
+        """
         assert 0 <= idx < self.capacity
 
         return self.tree[self.capacity + idx]
@@ -73,7 +80,6 @@ class SumSegmentTree(SegmentTree):
         """Initialisation.
         Args:
             capacity (int)
-
         """
         super(SumSegmentTree, self).__init__(capacity = capacity, operation = operator.add, init_value = 0.0)
 
@@ -82,8 +88,9 @@ class SumSegmentTree(SegmentTree):
         return super(SumSegmentTree, self).operate(start, end)
 
     def retrieve(self, upperbound):
-        """Find the highest index `i` about upper bound in the tree"""
-
+        """
+        Find the highest index 'i' about upper bound in the tree.
+        """
         assert 0 <= upperbound <= self.sum() + 1e-5, "upperbound: {}".format(upperbound)
 
         idx = 1
@@ -105,10 +112,8 @@ class MinSegmentTree(SegmentTree):
     """
     def __init__(self, capacity):
         """Initialisation.
-
         Args:
             capacity (int)
-
         """
         super(MinSegmentTree, self).__init__(capacity = capacity, operation = min, init_value = float("inf"))
 
@@ -117,8 +122,9 @@ class MinSegmentTree(SegmentTree):
         return super(MinSegmentTree, self).operate(start, end)
 
 class ReplayBuffer:
-    """A simple numpy replay buffer."""
-
+    """
+    A simple NumPy replay buffer.
+    """
     def __init__(self, obs_shape, size, batch_size = 32, n_step = 3, gamma = 0.99):
         self.obs_buf = np.zeros([size] + list(obs_shape), dtype = np.float32)
         self.next_obs_buf = np.zeros([size] + list(obs_shape), dtype = np.float32)
@@ -165,7 +171,9 @@ class ReplayBuffer:
         return dict(obs = self.obs_buf[idxs], next_obs = self.next_obs_buf[idxs], acts = self.acts_buf[idxs], rews=self.rews_buf[idxs], done = self.done_buf[idxs])
 
     def _get_n_step_info(self, n_step_buffer, gamma):
-        """Return n step rew, next_obs, and done."""
+        """
+        Return n step rew, next_obs, and done.
+        """
         # info of the last transition
         rew, next_obs, done = n_step_buffer[-1][-3:]
 
@@ -181,10 +189,13 @@ class ReplayBuffer:
         return self.size
 
 class PrioritizedReplayBuffer(ReplayBuffer):
-    """Prioritized Replay Buffer."""
-
+    """
+    Prioritized Replay Buffer
+    """
     def __init__(self, obs_shape, size, batch_size = 32, alpha = 0.5, n_step = 3, gamma = 0.99):
-        """Initialisation."""
+        """
+        Initialisation
+        """
         assert alpha >= 0
 
         super(PrioritizedReplayBuffer, self).__init__(obs_shape, size, batch_size, n_step, gamma)
@@ -200,7 +211,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         self.min_tree = MinSegmentTree(tree_capacity)
 
     def store(self, obs, act, rew, next_obs, done):
-        """Store experience and priority."""
+        """
+        Store experience and priority.
+        """
         transition = super().store(obs, act, rew, next_obs, done)
 
         if transition:
@@ -211,7 +224,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         return transition
 
     def sample_batch(self, beta = 0.4):
-        """Sample a batch of experiences."""
+        """
+        Sample a batch of experiences.
+        """
         assert len(self) >= self.batch_size
         assert beta > 0
 
@@ -227,7 +242,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         return dict(obs = obs, next_obs = next_obs, acts = acts, rews = rews, done = done, weights = weights, indices = indices)
 
     def update_priorities(self, indices, priorities):
-        """Update priorities of sampled transitions."""
+        """
+        Update priorities of sampled transitions.
+        """
         assert len(indices) == len(priorities)
 
         for idx, priority in zip(indices, priorities):
@@ -240,7 +257,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             self.max_priority = max(self.max_priority, priority)
 
     def _sample_proportional(self):
-        """Sample indices based on proportions."""
+        """
+        Sample indices based on proportions.
+        """
         indices = []
         p_total = self.sum_tree.sum(0, len(self) - 1)
         segment = p_total / self.batch_size
@@ -255,7 +274,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         return indices
 
     def _calculate_weight(self, idx, beta):
-        """Calculate the weight of the experience at idx."""
+        """
+        Calculate the weight of the experience at idx.
+        """
         # Get max weight
         p_min = self.min_tree.min() / self.sum_tree.sum()
         max_weight = (p_min * len(self)) ** (-beta)

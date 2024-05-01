@@ -34,7 +34,8 @@ class ObservationWrapper(gym.ObservationWrapper):
         return observation
 
 class GrayScaleObservation(gym.ObservationWrapper):
-    """Convert the image observation from RGB to gray scale.
+    """
+    Convert the image observation from RGB to grayscale.
     Example:
         >>> env = gym.make('CarRacing-v1')
         >>> env.observation_space
@@ -47,7 +48,8 @@ class GrayScaleObservation(gym.ObservationWrapper):
         Box(0, 255, (96, 96, 1), uint8)
     """
     def __init__(self, env: gym.Env, keep_dim: bool = False):
-        """Convert the image observation from RGB to gray scale.
+        """
+        Convert the image observation from RGB to grayscale.
         Args:
             env (Env): The environment to apply the wrapper
             keep_dim (bool): If `True`, a singleton dimension will be added, i.e. observations are of the shape AxBx1.
@@ -73,7 +75,8 @@ class GrayScaleObservation(gym.ObservationWrapper):
             )
 
     def observation(self, observation):
-        """Converts the colour observation to greyscale.
+        """
+        Converts the colour observation to grayscale.
         Args:
             observation: Color observations
         Returns:
