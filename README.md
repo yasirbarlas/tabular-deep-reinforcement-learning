@@ -45,7 +45,7 @@ difficulty level (doom_skill) = 3
 Gymnasium/Gym id: "VizdoomDefendCenter-v0"
 ```
 
-We note that our code is inspired by the [Rainbow is all you need!](https://github.com/Curt-Park/rainbow-is-all-you-need) repository, and that while much of our code is similar, we make certain adjustments to be suited for the ViZDoom environment, and we make the sequential improvements to each algorithm we examine as mentioned previously.
+We note that our code is inspired by the [Rainbow is all you need!](https://github.com/Curt-Park/rainbow-is-all-you-need) repository, and that while much of our code is similar, we make certain adjustments to be suited for the ViZDoom environment, and we make the sequential improvements to each algorithm we examine as mentioned previously. Since we are working with pixel data, we use the convolutional neural networks as found in the [RL Adventure](https://github.com/higgsfield/RL-Adventure/) repository.
 
 ## Individual Advanced Tasks
 
