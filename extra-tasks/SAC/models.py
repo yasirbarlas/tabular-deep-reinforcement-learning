@@ -16,22 +16,7 @@ def weights_init_(m):
         torch.nn.init.xavier_uniform_(m.weight, gain = 1)
         torch.nn.init.constant_(m.bias, 0)
 
-class ValueNetwork(nn.Module):
-    def __init__(self, num_inputs, hidden_dim):
-        super(ValueNetwork, self).__init__()
-
-        self.linear1 = nn.Linear(num_inputs, hidden_dim)
-        self.linear2 = nn.Linear(hidden_dim, hidden_dim)
-        self.linear3 = nn.Linear(hidden_dim, 1)
-
-        self.apply(weights_init_)
-
-    def forward(self, state):
-        x = F.relu(self.linear1(state))
-        x = F.relu(self.linear2(x))
-        x = self.linear3(x)
-        return x
-
+# Q-Network Class
 class QNetwork(nn.Module):
     def __init__(self, num_inputs, num_actions, hidden_dim):
         super(QNetwork, self).__init__()
@@ -61,6 +46,7 @@ class QNetwork(nn.Module):
 
         return x1, x2
 
+# Gaussian Policy Network
 class GaussianPolicy(nn.Module):
     def __init__(self, num_inputs, num_actions, hidden_dim, action_space = None, log_sig_max = 2, log_sig_min = -20, epsilon = 0.000001):
         super(GaussianPolicy, self).__init__()
@@ -77,7 +63,7 @@ class GaussianPolicy(nn.Module):
 
         self.apply(weights_init_)
 
-        # action rescaling
+        # Action rescaling
         if action_space is None:
             self.action_scale = torch.tensor(1, dtype = torch.float, device = device)
             self.action_bias = torch.tensor(0, dtype = torch.float, device = device)

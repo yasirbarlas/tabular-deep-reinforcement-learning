@@ -2,6 +2,7 @@ import numpy as np
 import torch
 import math
 
+# Scale learning rate
 def adjust_learning_rate(optimizer, shrink_factor):
     """
     Shrinks learning rate by a specified factor
@@ -15,5 +16,6 @@ def adjust_learning_rate(optimizer, shrink_factor):
         param_group["lr"] = param_group["lr"] * shrink_factor
     print("The new learning rate is %f\n" % (optimizer.param_groups[0]["lr"]))
 
+# Calculate moving average (for plotting)
 def moving_average(data, window_size = 100):
     return np.convolve(a = data, v = np.ones(window_size), mode = "valid") / window_size

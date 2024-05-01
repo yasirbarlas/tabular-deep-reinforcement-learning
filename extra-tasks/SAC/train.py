@@ -15,7 +15,7 @@ seed = 50
 ## SAC ##
 hidden_dim = 256
 tau = 0.005
-initial_random_steps = 50000
+initial_random_steps = 1000
 updates_per_step = 1
 target_update_interval = 1
 ## Discount Factor ##
