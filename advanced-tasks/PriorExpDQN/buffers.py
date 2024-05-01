@@ -4,9 +4,11 @@ import numpy as np
 from collections import deque
 
 ## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/03.per.ipynb ##
+## With some changes ##
 
 class SegmentTree:
-    """ Create SegmentTree.
+    """
+    Create SegmentTree.
     Taken from OpenAI baselines github repository:
     https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
     Attributes:
@@ -15,12 +17,12 @@ class SegmentTree:
         operation (function)
     """
     def __init__(self, capacity, operation, init_value):
-        """Initialisation.
+        """
+        Initialisation.
         Args:
             capacity (int)
             operation (function)
             init_value (float)
-
         """
         assert (capacity > 0 and capacity & (capacity - 1) == 0), "capacity must be positive and a power of 2."
         self.capacity = capacity
@@ -28,7 +30,9 @@ class SegmentTree:
         self.operation = operation
 
     def _operate_helper(self, start, end, node, node_start, node_end):
-        """Returns result of operation in segment."""
+        """
+        Returns result of operation in segment.
+        """
         if start == node_start and end == node_end:
             return self.tree[node]
         mid = (node_start + node_end) // 2
@@ -41,7 +45,9 @@ class SegmentTree:
                 return self.operation(self._operate_helper(start, mid, 2 * node, node_start, mid), self._operate_helper(mid + 1, end, 2 * node + 1, mid + 1, node_end))
 
     def operate(self, start = 0, end = 0):
-        """Returns result of applying `self.operation`."""
+        """
+        Returns result of applying 'self.operation'.
+        """
         if end <= 0:
             end += self.capacity
         end -= 1
@@ -49,7 +55,9 @@ class SegmentTree:
         return self._operate_helper(start, end, 1, 0, self.capacity - 1)
 
     def __setitem__(self, idx, val):
-        """Set value in tree."""
+        """
+        Set value in tree.
+        """
         idx += self.capacity
         self.tree[idx] = val
 
@@ -59,13 +67,16 @@ class SegmentTree:
             idx //= 2
 
     def __getitem__(self, idx):
-        """Get real value in leaf node of tree."""
+        """
+        Get real value in leaf node of tree.
+        """
         assert 0 <= idx < self.capacity
 
         return self.tree[self.capacity + idx]
 
 class SumSegmentTree(SegmentTree):
-    """ Create SumSegmentTree.
+    """
+    Create SumSegmentTree.
     Taken from OpenAI baselines github repository:
     https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
     """
@@ -73,17 +84,19 @@ class SumSegmentTree(SegmentTree):
         """Initialisation.
         Args:
             capacity (int)
-
         """
         super(SumSegmentTree, self).__init__(capacity = capacity, operation = operator.add, init_value = 0.0)
 
     def sum(self, start = 0, end = 0):
-        """Returns arr[start] + ... + arr[end]."""
+        """
+        Returns arr[start] + ... + arr[end].
+        """
         return super(SumSegmentTree, self).operate(start, end)
 
     def retrieve(self, upperbound):
-        """Find the highest index `i` about upper bound in the tree"""
-
+        """
+        Find the highest index 'i' about upper bound in the tree
+        """
         assert 0 <= upperbound <= self.sum() + 1e-5, "upperbound: {}".format(upperbound)
 
         idx = 1
@@ -99,26 +112,28 @@ class SumSegmentTree(SegmentTree):
         return idx - self.capacity
 
 class MinSegmentTree(SegmentTree):
-    """ Create SegmentTree.
+    """
+    Create SegmentTree.
     Taken from OpenAI baselines github repository:
     https://github.com/openai/baselines/blob/master/baselines/common/segment_tree.py
     """
     def __init__(self, capacity):
         """Initialisation.
-
         Args:
             capacity (int)
-
         """
         super(MinSegmentTree, self).__init__(capacity = capacity, operation = min, init_value = float("inf"))
 
     def min(self, start = 0, end = 0):
-        """Returns min(arr[start], ...,  arr[end])."""
+        """
+        Returns min(arr[start], ...,  arr[end]).
+        """
         return super(MinSegmentTree, self).operate(start, end)
 
 class ReplayBuffer:
-    """A simple numpy replay buffer."""
-
+    """
+    A simple NumPy replay buffer.
+    """
     def __init__(self, obs_shape, size, batch_size = 32):
         self.obs_buf = np.zeros([size] + list(obs_shape), dtype = np.float32)
         self.next_obs_buf = np.zeros([size] + list(obs_shape), dtype = np.float32)
@@ -146,10 +161,13 @@ class ReplayBuffer:
         return self.size
 
 class PrioritizedReplayBuffer(ReplayBuffer):
-    """Prioritized Replay Buffer."""
-
+    """
+    Prioritized Replay Buffer.
+    """
     def __init__(self, obs_shape, size, batch_size = 32, alpha = 0.5):
-        """Initialisation."""
+        """
+        Initialisation.
+        """
         assert alpha >= 0
 
         super(PrioritizedReplayBuffer, self).__init__(obs_shape, size, batch_size)
@@ -165,7 +183,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         self.min_tree = MinSegmentTree(tree_capacity)
 
     def store(self, obs, act, rew, next_obs, done):
-        """Store experience and priority."""
+        """
+        Store experience and priority.
+        """
         super().store(obs, act, rew, next_obs, done)
 
         self.sum_tree[self.tree_ptr] = self.max_priority ** self.alpha
@@ -173,7 +193,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         self.tree_ptr = (self.tree_ptr + 1) % self.max_size
 
     def sample_batch(self, beta = 0.4):
-        """Sample a batch of experiences."""
+        """
+        Sample a batch of experiences.
+        """
         assert len(self) >= self.batch_size
         assert beta > 0
 
@@ -189,7 +211,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         return dict(obs = obs, next_obs = next_obs, acts = acts, rews = rews, done = done, weights = weights, indices = indices)
 
     def update_priorities(self, indices, priorities):
-        """Update priorities of sampled transitions."""
+        """
+        Update priorities of sampled transitions.
+        """
         assert len(indices) == len(priorities)
 
         for idx, priority in zip(indices, priorities):
@@ -202,7 +226,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             self.max_priority = max(self.max_priority, priority)
 
     def _sample_proportional(self):
-        """Sample indices based on proportions."""
+        """
+        Sample indices based on proportions.
+        """
         indices = []
         p_total = self.sum_tree.sum(0, len(self) - 1)
         segment = p_total / self.batch_size
@@ -217,7 +243,9 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         return indices
 
     def _calculate_weight(self, idx, beta):
-        """Calculate the weight of the experience at idx."""
+        """
+        Calculate the weight of the experience at idx.
+        """
         # Get max weight
         p_min = self.min_tree.min() / self.sum_tree.sum()
         max_weight = (p_min * len(self)) ** (-beta)
