@@ -13,6 +13,9 @@ from buffers import *
 from models import *
 from utils import *
 
+## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/07.n_step_learning.ipynb ##
+## With some changes ##
+
 class NStepAgent:
     """
     N-step (with PER, Noisy Networks) DQN Agent
