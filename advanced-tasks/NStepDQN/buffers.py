@@ -4,6 +4,7 @@ import numpy as np
 from collections import deque
 
 ## As found in https://github.com/Curt-Park/rainbow-is-all-you-need/blob/master/08.rainbow.ipynb ##
+## With some changes ##
 
 class SegmentTree:
     """ Create SegmentTree.
