@@ -53,6 +53,8 @@ def main():
 
     agent = PriorExpReplayAgent(env, memory_size, batch_size, target_update, seed, gamma, max_epsilon, min_epsilon, epsilon_decay, alpha, beta, prior_eps, learning_rate, optimizer)
 
+    #agent._load_checkpoint("checkpoints/checkpoint_PER_dqn_latest.pth.tar", include_optimiser = True)
+
     agent.train(num_frames)
 
     agent.test()
