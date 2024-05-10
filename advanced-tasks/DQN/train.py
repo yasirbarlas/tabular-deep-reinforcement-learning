@@ -49,6 +49,8 @@ def main():
 
     agent = SimpleAgent(env, memory_size, batch_size, target_update, seed, gamma, max_epsilon, min_epsilon, epsilon_decay, learning_rate, optimizer)
 
+    #agent._load_checkpoint("checkpoints/checkpoint_simple_dqn_latest.pth.tar", include_optimiser = True)
+    
     agent.train(num_frames)
 
     agent.test()

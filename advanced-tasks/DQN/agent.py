@@ -280,3 +280,11 @@ class SimpleAgent:
         
         plt.savefig("simple_dqn_plot.pdf")
         plt.close()
+
+    def _load_checkpoint(self, checkpoint_path, include_optimiser = True):
+        model = torch.load(checkpoint_path, map_location = self.device)
+        self.dqn.load_state_dict(model["current_model"])
+        self.dqn_target.load_state_dict(model["target_model"])
+        
+        if include_optimiser == True:
+            self.optimizer.load_state_dict(model["optimizer"])
