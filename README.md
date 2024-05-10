@@ -10,7 +10,7 @@ The relevant Jupyter Notebook can be found in the [basic-tasks](../main/basic-ta
 
 ## Advanced Tasks
 
-We investigate the [(Target Network + Experience Replay) Deep Q-Network (DQN)](https://www.nature.com/articles/nature14236), the [Prioritised Experience Replay DQN](https://arxiv.org/abs/1511.05952v4), the [Noisy Network DQN](https://arxiv.org/abs/1706.10295), and the [N-Step Return DQN](https://link.springer.com/article/10.1007/BF00115009) algorithms on the ViZDoom 'Defend The Center' environment. Each algorithm utilises the previous ones sequentially, similar to what is done in [Rainbow DQN](https://arxiv.org/abs/1710.02298). In other words, we look at a Target Network + Experience Replay DQN, a Target Network + Prioritised Experience Replay DQN, a Target Network + Prioritised Experience Replay + Noisy Network DQN, and lastly a Target Network + Prioritised Experience Replay + Noisy Network + N-Step Return DQN. We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
+We investigate the [(Target Network + Experience Replay) Deep Q-Network (DQN)](https://www.nature.com/articles/nature14236), the [Prioritised Experience Replay DQN](https://arxiv.org/abs/1511.05952v4), the [Noisy Network DQN](https://arxiv.org/abs/1706.10295), and the [N-Step Return DQN](https://link.springer.com/article/10.1007/BF00115009) algorithms on the [ViZDoom 'Defend The Center'](https://vizdoom.farama.org/) environment. Each algorithm utilises the previous ones sequentially, similar to what is done in [Rainbow DQN](https://arxiv.org/abs/1710.02298). In other words, we look at a Target Network + Experience Replay DQN, a Target Network + Prioritised Experience Replay DQN, a Target Network + Prioritised Experience Replay + Noisy Network DQN, and lastly a Target Network + Prioritised Experience Replay + Noisy Network + N-Step Return DQN. We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
 
 We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, ViZDoom 1.2.3, and for recording the agent in the testing phase, MoviePy 1.0.3. Instructions for installing ViZDoom (through Github or pip) can be found [here](https://vizdoom.farama.org/).
 
@@ -49,9 +49,17 @@ We note that our code is inspired by the [Rainbow is all you need!](https://gith
 
 ## Individual Advanced Tasks
 
+We use the Proximal Policy Optimisation algorithm on the multi-agent [PettingZoo Atari 'Space Invaders'](https://pettingzoo.farama.org/environments/atari/space_invaders/) environment, which is an on-policy policy gradient algorithm that tries to make large policy improvements without causing performance collapse. Rather than implementing the algorithm from scratch, we utilise the Ray RLlib library instead. We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
+
+Our algorithms do not use the latest Ray RLlib API stack, but do use the latest version of the old API stack. We recommend installing the "Daily Release" of Ray RLlib rather than the latest official release using pip, though both installation methods should work. Find more information on the [Ray](https://docs.ray.io/en/latest/ray-overview/installation.html) website.
+
+We use Python 3.10.13, Ray 3.0.0.dev0 (Daily Release), PyTorch (with CUDA 12.1), PettingZoo 1.24.3, and SuperSuit 3.9.2. The ROMs for the Atari environments also need to be installed, which can be done through: ```pip install autorom[accept-rom-license]```. See the [AutoROM](https://github.com/Farama-Foundation/AutoROM) repository for more information.
+
+The relevant Jupyter Notebooks and code can be found in the [advanced-tasks-individual](../main/advanced-tasks-individual) folder.
+
 ## Extra Tasks
 
-The soft actor-critic algorithm is considered a state-of-the-art algorithm, notably in continuous control tasks. It combines actor-critic methods with maximum entropy reinforcement learning, encouraging exploration while simultaneously optimising for both policy improvement and entropy maximisation. We provide code to work on many of the continuous control tasks found on [Gymnasium](https://gymnasium.farama.org/index.html).
+The Soft Actor-Critic algorithm is considered a state-of-the-art algorithm, notably in continuous control tasks. It combines actor-critic methods with maximum entropy reinforcement learning, encouraging exploration while simultaneously optimising for both policy improvement and entropy maximisation. We provide code to work on many of the continuous control tasks found on [Gymnasium](https://gymnasium.farama.org/index.html). We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
 
 We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, and for recording the agent in the testing phase, MoviePy 1.0.3.
 
