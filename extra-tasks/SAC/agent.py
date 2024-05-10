@@ -365,3 +365,16 @@ class SACAgent:
         plt.legend()
         plt.savefig("sac_plot_reward.pdf")
         plt.close()
+
+    def _load_checkpoint(self, checkpoint_path, include_optimiser = True):
+        """
+        Load the models from a checkpoint.
+        """
+        model = torch.load(checkpoint_path, map_location = self.device)
+        self.policy.load_state_dict(model["policy_state_dict"])
+        self.critic.load_state_dict(model["critic_state_dict"])
+        self.critic_target.load_state_dict(model["critic_target_state_dict"])
+        
+        if include_optimiser == True:
+            self.policy_optim.load_state_dict(model["policy_optimizer_state_dict"])
+            self.critic_optim.load_state_dict(model["critic_optimizer_state_dict"])
