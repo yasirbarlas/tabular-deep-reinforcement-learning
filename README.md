@@ -18,6 +18,8 @@ Much work on reinforcement learning seems to be built using the old versions of 
 
 The relevant Jupyter Notebooks and code can be found in the [advanced-tasks](../main/advanced-tasks) folder.
 
+We provide model checkpoints for each of the DQN algorithms we investigate, all of which can be downloaded [here](https://cityuni-my.sharepoint.com/:f:/g/personal/yasir-zubayr_barlas_city_ac_uk/EsKQGEAsns9BgfrswKtlM9QBndWCBJz82Eum_YV1W5zLOg?e=DW3nc7).
+
 The following is information regarding the ViZDoom environment we use:
 
 ```
