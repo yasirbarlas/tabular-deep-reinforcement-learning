@@ -59,6 +59,8 @@ We use Python 3.10.13, Ray 3.0.0.dev0 (Daily Release), PyTorch (with CUDA 12.1),
 
 The relevant Jupyter Notebooks and code can be found in the [advanced-tasks-individual](../main/advanced-tasks-individual) folder.
 
+We provide model checkpoints and our final results for each of the experiments conducted, all of which can be downloaded [here](https://cityuni-my.sharepoint.com/:f:/g/personal/yasir-zubayr_barlas_city_ac_uk/EiBjxuscMF1OuP81VFB2RhgBhSTa1fwDOjwgaNJ6llUHUg?e=bqYcVa).
+
 We note that our code is based on a [PettingZoo tutorial](https://pettingzoo.farama.org/tutorials/rllib/pistonball/), which has been adapted to work on our environment.
 
 ## Extra Tasks
