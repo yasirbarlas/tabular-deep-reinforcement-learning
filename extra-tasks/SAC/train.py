@@ -39,6 +39,8 @@ def main():
     
     agent = SACAgent(env, memory_size, batch_size, seed, gamma, tau, initial_random_steps, updates_per_step, target_update_interval, hidden_dim, learning_rate, optimizer)
 
+    #agent._load_checkpoint("checkpoints/checkpoint_sac_latest.pth.tar", include_optimiser = True)
+    
     agent.train(num_frames)
 
     agent.test()
