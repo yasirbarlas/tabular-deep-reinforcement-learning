@@ -51,6 +51,8 @@ def main():
 
     agent = NoisyAgent(env, memory_size, batch_size, target_update, seed, gamma, alpha, beta, prior_eps, noisy_std, learning_rate, optimizer)
 
+    #agent._load_checkpoint("checkpoints/checkpoint_noisy_dqn_latest.pth.tar", include_optimiser = True)
+
     agent.train(num_frames)
 
     agent.test()
