@@ -207,6 +207,8 @@ class PriorExpReplayAgent:
         Test the agent.
         """
         self.is_test = True
+        old_epsilon = self.epsilon
+        self.epsilon = 0
         
         # Create checkpoint folder
         if not os.path.exists(video_folder):
@@ -232,6 +234,7 @@ class PriorExpReplayAgent:
         
         # Reset
         self.env = naive_env
+        self.epsilon = old_epsilon
 
     def _compute_dqn_loss(self, samples):
         """
@@ -303,9 +306,6 @@ class PriorExpReplayAgent:
         plt.close()
 
     def _load_checkpoint(self, checkpoint_path, include_optimiser = True):
-        """
-        Load the models from a checkpoint.
-        """
         model = torch.load(checkpoint_path, map_location = self.device)
         self.dqn.load_state_dict(model["current_model"])
         self.dqn_target.load_state_dict(model["target_model"])
