@@ -57,6 +57,8 @@ We use Python 3.10.13, Ray 3.0.0.dev0 (Daily Release), PyTorch (with CUDA 12.1),
 
 The relevant Jupyter Notebooks and code can be found in the [advanced-tasks-individual](../main/advanced-tasks-individual) folder.
 
+We note that our code is based on a [PettingZoo tutorial](https://pettingzoo.farama.org/tutorials/rllib/pistonball/), which has been adapted to work on our environment.
+
 ## Extra Tasks
 
 The Soft Actor-Critic algorithm is considered a state-of-the-art algorithm, notably in continuous control tasks. It combines actor-critic methods with maximum entropy reinforcement learning, encouraging exploration while simultaneously optimising for both policy improvement and entropy maximisation. We provide code to work on many of the continuous control tasks found on [Gymnasium](https://gymnasium.farama.org/index.html). We provide the code in standard .py form and as Jupyter Notebooks, and neither of these depend on each other to run.
