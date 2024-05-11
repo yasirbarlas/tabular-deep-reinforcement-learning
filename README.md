@@ -58,7 +58,7 @@ We use the Proximal Policy Optimisation algorithm on the multi-agent [PettingZoo
 
 Our algorithms do not use the latest Ray RLlib API stack, but do use the latest version of the old API stack. We recommend installing the "Daily Release" of Ray RLlib rather than the latest official release using pip, though both installation methods should work. Find more information on the [Ray](https://docs.ray.io/en/latest/ray-overview/installation.html) website.
 
-We use Python 3.10.13, Gymnasium 0.28.1 (Ray RLlib does not support the latest version), Ray 3.0.0.dev0 (Daily Release), PyTorch (with CUDA 12.1), PettingZoo 1.24.3, and SuperSuit 3.9.2. The ROMs for the Atari environments also need to be installed, which can be done through: ```pip install autorom[accept-rom-license]```. See the [AutoROM](https://github.com/Farama-Foundation/AutoROM) repository for more information.
+We use Python 3.10.13, Gymnasium 0.28.1 (Ray RLlib does not support the latest version), Ray 3.0.0.dev0 (Daily Release), PyTorch (with CUDA 12.1), PettingZoo 1.24.3, and SuperSuit 3.9.2. The ROMs for the Atari environments also need to be installed, which can be done through: ```pip install autorom[accept-rom-license]```. See the [AutoROM](https://github.com/Farama-Foundation/AutoROM) repository for more information. We recommend using a Linux or macOS machine here, as Windows is not very user friendly with PettingZoo. Notably, CMake is required to install the multi-agent Atari extensions, which is not normally installed on Windows machines.
 
 The relevant code can be found in the [advanced-tasks-individual](../main/advanced-tasks-individual) folder.
 
