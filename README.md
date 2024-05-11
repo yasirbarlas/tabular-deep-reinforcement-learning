@@ -73,4 +73,6 @@ Much work on reinforcement learning seems to be built using the old versions of 
 
 The relevant Jupyter Notebooks and code can be found in the [extra-tasks](../main/extra-tasks) folder.
 
+We provide model checkpoints for each of the experiments conducted, all of which can be downloaded [here](https://cityuni-my.sharepoint.com/:f:/g/personal/yasir-zubayr_barlas_city_ac_uk/EiwQl3vYcRVKvJxY9MreegMBntqf0vxUfaEaM9z7WztAQQ?e=djqEYW).
+
 We note that our Agent class is inspired by the [PG is all you need!](https://github.com/MrSyee/pg-is-all-you-need) repository, and much of the code is adapted from the [pytorch-soft-actor-critic](https://github.com/pranz24/pytorch-soft-actor-critic) repository.
