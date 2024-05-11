@@ -7,7 +7,7 @@ from wrappers import *
 import gymnasium as gym
 
 ##### PARAMETERS #####
-env_id = "Ant-v4"
+env_id = "Ant-v4" ## we also experimented "HalfCheetah-v4" ##
 num_frames = 5000000
 memory_size = 300000
 batch_size = 128
