@@ -1,6 +1,7 @@
 # INM707: Deep Reinforcement Learning
 
 Note: This repository and its contents support the coursework of the INM707 module at City, University of London.
+Note for examiners: The Advanced Individual Tasks and Extra Task were run on the Hyperion High-Performance Computer, hence the lack of Jupyter Notebooks.
 
 ## Basic Tasks
 
