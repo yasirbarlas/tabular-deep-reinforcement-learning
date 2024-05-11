@@ -57,7 +57,7 @@ Our algorithms do not use the latest Ray RLlib API stack, but do use the latest 
 
 We use Python 3.10.13, Ray 3.0.0.dev0 (Daily Release), PyTorch (with CUDA 12.1), PettingZoo 1.24.3, and SuperSuit 3.9.2. The ROMs for the Atari environments also need to be installed, which can be done through: ```pip install autorom[accept-rom-license]```. See the [AutoROM](https://github.com/Farama-Foundation/AutoROM) repository for more information.
 
-The relevant Jupyter Notebooks and code can be found in the [advanced-tasks-individual](../main/advanced-tasks-individual) folder.
+The relevant code can be found in the [advanced-tasks-individual](../main/advanced-tasks-individual) folder.
 
 We provide model checkpoints and our final results for each of the experiments conducted, all of which can be downloaded [here](https://cityuni-my.sharepoint.com/:f:/g/personal/yasir-zubayr_barlas_city_ac_uk/EiBjxuscMF1OuP81VFB2RhgBhSTa1fwDOjwgaNJ6llUHUg?e=bqYcVa).
 
@@ -71,7 +71,7 @@ We use Python 3.10.13, PyTorch (with CUDA 12.1), Gymnasium 0.29.0, and for recor
 
 Much work on reinforcement learning seems to be built using the old versions of PyTorch and Gym. Here, we ensure that our code runs well on the latest versions of these libraries.
 
-The relevant Jupyter Notebooks and code can be found in the [extra-tasks](../main/extra-tasks) folder.
+The relevant code can be found in the [extra-tasks](../main/extra-tasks) folder.
 
 We provide model checkpoints for each of the experiments conducted, all of which can be downloaded [here](https://cityuni-my.sharepoint.com/:f:/g/personal/yasir-zubayr_barlas_city_ac_uk/EiwQl3vYcRVKvJxY9MreegMBntqf0vxUfaEaM9z7WztAQQ?e=djqEYW).
 
