@@ -1,0 +1,9 @@
+matplotlib==3.7.4
+numpy==1.24.4
+gymnasium==0.28.1
+autorom[accept-rom-license]==0.6.1
+pettingzoo==1.24.3
+pettingzoo[atari]==1.24.3
+ray[rllib]==2.20.0
+gputil==1.4.0
+supersuit==3.9.2
