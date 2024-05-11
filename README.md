@@ -54,7 +54,7 @@ We note that our code is inspired by the [Rainbow is all you need!](https://gith
 
 ## Individual Advanced Tasks
 
-We use the Proximal Policy Optimisation algorithm on the multi-agent [PettingZoo Atari 'Space Invaders'](https://pettingzoo.farama.org/environments/atari/space_invaders/) environment, which is an on-policy policy gradient algorithm that tries to make large policy improvements without causing performance collapse. Rather than implementing the algorithm from scratch, we utilise the Ray RLlib library instead. We provide the code in standard .py form.
+We use the Proximal Policy Optimisation algorithm on the multi-agent [PettingZoo Atari 'Space Invaders'](https://pettingzoo.farama.org/environments/atari/space_invaders/) environment, which is an on-policy policy gradient algorithm that tries to make large policy improvements without causing performance collapse. We use parameter sharing in our work. Rather than implementing the algorithm from scratch, we utilise the Ray RLlib library instead. We provide the code in standard .py form.
 
 Our algorithms do not use the latest Ray RLlib API stack, but do use the latest version of the old API stack. We recommend installing the "Daily Release" of Ray RLlib rather than the latest official release using pip, though both installation methods should work. Find more information on the [Ray](https://docs.ray.io/en/latest/ray-overview/installation.html) website.
 
