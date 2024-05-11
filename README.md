@@ -3,6 +3,8 @@
 Note: This repository and its contents support the coursework of the INM707 module at City, University of London.
 Note for examiners: The Advanced Individual Tasks and Extra Task were run on the Hyperion High-Performance Computer, hence the lack of Jupyter Notebooks.
 
+The ``requirements.txt`` files assume that you have PyTorch (ideally the CUDA version for GPU usage) already installed. Find more information about how to install PyTorch [here](https://pytorch.org/get-started/locally/).
+
 ## Basic Tasks
 
 We create a Gridworld-like environment using NumPy and Matplotlib. The environment specifically looks at an agent traversing a single-story house (or apartment), with the aim of cleaning the carpets of the house. We refer to the agent as a robot vacuum cleaner. The agent receives a positive reward for cleaning carpets, a negative reward for bumping into walls/furniture or trying to escape the grid, a negative reward for moving onto states with cables/wires, and lastly a positive reward for entering the terminal state (a charging station).
