@@ -1,7 +1,6 @@
-# INM707: Deep Reinforcement Learning
+# Tabular and Deep Reinforcement Learning Approaches to Discrete and Continuous Environments
 
 Note: This repository and its contents support the coursework of the INM707 module at City, University of London.
-Note for examiners: The Advanced Individual Tasks and Extra Task were run on the Hyperion High-Performance Computer, hence the lack of Jupyter Notebooks.
 
 The ``requirements.txt`` files assume that you have PyTorch (ideally the CUDA version for GPU usage) already installed. Find more information about how to install PyTorch [here](https://pytorch.org/get-started/locally/).
 
